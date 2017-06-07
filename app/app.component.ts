@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
   <div class="container">
     <h2>Kegs</h2>
     <ul>
-      <li *ngFor="let currentKeg of kegs"><b>{{currentKeg.name}}</b> -<em>{{currentKeg.brand}}</em><br>alcohol content: {{currentKeg.alcoholContent}}%  \${{currentKeg.price}} per pint <button (click)="editKeg(currentKeg)">Edit Keg</button></li>
+      <li [class]="brandColor(currentKeg)"  *ngFor="let currentKeg of kegs"><b>{{currentKeg.name}}</b> -<em>{{currentKeg.brand}}</em><br>alcohol content: <span [class]="alcBold(currentKeg)"> {{currentKeg.alcoholContent}}% </span>  \${{currentKeg.price}} per pint <button (click)="editKeg(currentKeg)">Edit Keg</button></li>
     </ul>
     <div *ngIf="selectedKeg">
       <h3>{{selectedKeg.name}}</h3>
@@ -33,7 +33,9 @@ export class AppComponent {
     new Keg('Sour Darkness', 'Forever Alone', 13.1, 5),
     new Keg('Jus Peachy', 'Liphes Gud', 6, 6),
     new Keg('Hip Hoppy IPA', 'Splitting Hares', 7, 5),
-    new Keg('Pitch Noir', 'Busta Limes', 5, 4)
+    new Keg('Pitch Noir', 'Busta Limes', 5, 4),
+    new Keg('Grave Lies', 'Forever Alone', 13.2, 5),
+    new Keg('Bg-Faded', 'Forever Alone', 11, 5)
   ];
   selectedKeg = null;
 
@@ -43,6 +45,23 @@ export class AppComponent {
 
   finishedEditing() {
     this.selectedKeg = null;
+  }
+
+  brandColor(currentKeg) {
+    if (currentKeg.brand === 'Forever Alone') {
+      return 'bg-danger';
+    } else if (currentKeg.brand === 'Liphes Gud') {
+      return 'bg-info';
+    } else if (currentKeg.brand === 'Splitting Hares') {
+      return 'bg-warning';
+    } else {
+      return 'bg-success';
+    }
+  }
+  alcBold(currentKeg) {
+    if (currentKeg.alcoholContent > 7) {
+      return 'badge';
+    }
   }
 }
 
