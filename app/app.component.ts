@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
   <div class="container">
     <h2>Kegs</h2>
     <ul>
-      <li [class]="brandColor(currentKeg)"  *ngFor="let currentKeg of kegs"><b>{{currentKeg.name}}</b> -<em>{{currentKeg.brand}}</em><br>alcohol content: <span [class]="alcBold(currentKeg)"> {{currentKeg.alcoholContent}}% </span>  \${{currentKeg.price}} per pint <button (click)="editKeg(currentKeg)">Edit Keg</button> {{currentKeg.pints}} beers on the wall <button (click)="sellPint(currentKeg)">Sold Pint</button></li>
+      <li [class]="brandColor(currentKeg)"  *ngFor="let currentKeg of kegs"><b>{{currentKeg.name}}</b> -<em>{{currentKeg.brand}}</em><br>alcohol content: <span [class]="alcBold(currentKeg)"> {{currentKeg.alcoholContent}}% </span>  \${{currentKeg.price}} per pint <button (click)="editKeg(currentKeg)">Edit Keg</button> {{currentKeg.pints}} beers on the wall <button (click)="sellPint(currentKeg)">Sold Pint</button> <button (click)="replaceKeg(currentKeg)">Replace this keg</button></li>
     </ul>
     <div *ngIf="selectedKeg">
       <h3>{{selectedKeg.name}}</h3>
@@ -46,7 +46,14 @@ export class AppComponent {
   sellPint(currentKeg) {
     if (currentKeg.pints > 0) {
       currentKeg.pints -= 1;
-    } 
+      if (currentKeg.pints === 10) {
+        alert('Warning! Running low on this keg! Life is finite.');
+      }
+    }
+  }
+
+  replaceKeg(currentKeg) {
+    currentKeg.pints = 124;
   }
 
   finishedEditing() {
