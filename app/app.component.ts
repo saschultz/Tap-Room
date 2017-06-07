@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
   <div class="container">
     <h2>Kegs</h2>
     <ul>
-      <li [class]="brandColor(currentKeg)"  *ngFor="let currentKeg of kegs"><b>{{currentKeg.name}}</b> -<em>{{currentKeg.brand}}</em><br>alcohol content: <span [class]="alcBold(currentKeg)"> {{currentKeg.alcoholContent}}% </span>  \${{currentKeg.price}} per pint <button (click)="editKeg(currentKeg)">Edit Keg</button></li>
+      <li [class]="brandColor(currentKeg)"  *ngFor="let currentKeg of kegs"><b>{{currentKeg.name}}</b> -<em>{{currentKeg.brand}}</em><br>alcohol content: <span [class]="alcBold(currentKeg)"> {{currentKeg.alcoholContent}}% </span>  \${{currentKeg.price}} per pint <button (click)="editKeg(currentKeg)">Edit Keg</button> {{currentKeg.pints}} beers on the wall <button (click)="sellPint(currentKeg)">Sold Pint</button></li>
     </ul>
     <div *ngIf="selectedKeg">
       <h3>{{selectedKeg.name}}</h3>
@@ -43,6 +43,12 @@ export class AppComponent {
     this.selectedKeg = clickedKeg;
   }
 
+  sellPint(currentKeg) {
+    if (currentKeg.pints > 0) {
+      currentKeg.pints -= 1;
+    } 
+  }
+
   finishedEditing() {
     this.selectedKeg = null;
   }
@@ -59,12 +65,13 @@ export class AppComponent {
     }
   }
   alcBold(currentKeg) {
-    if (currentKeg.alcoholContent > 7) {
+    if (currentKeg.alcoholContent > 6) {
       return 'badge';
     }
   }
 }
 
 export class Keg {
+  public pints: number = 124;
   constructor(public name: string, public brand: string, public alcoholContent: number, public price: number){}
 }
