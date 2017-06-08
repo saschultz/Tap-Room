@@ -1,5 +1,5 @@
 {
-  "name": "angular2-to-do",
+  "name": "tap_room_ng",
   "version": "1.0.0",
   "scripts": {
     "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\" ",
@@ -44,4 +44,3 @@
     "typings":"1.3.2"
   }
 }
-

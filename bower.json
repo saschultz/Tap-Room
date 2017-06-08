@@ -1,9 +1,9 @@
 {
-  "name": "tap-room",
+  "name": "tap_room_ng",
   "description": "",
   "main": "",
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/BenWilliams7/tap_room_ng",
   "ignore": [
     "**/.*",
     "node_modules",
