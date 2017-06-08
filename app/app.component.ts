@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Keg } from './keg.model';
 
-
 @Component({
   selector: 'app-root',
   template: `
@@ -13,6 +12,7 @@ import { Keg } from './keg.model';
 
     <keg-list [childKegList]="masterKegList" (clickSender)="editKeg($event)"></keg-list>
     <edit-keg [childSelectedKeg]="selectedKeg" (doneButtonClickedSender)="finishedEditing()"></edit-keg>
+    <new-keg (newKegSender)='addKeg($event)'></new-keg>
   </div>
   `
 })
@@ -35,5 +35,9 @@ export class AppComponent {
 
   finishedEditing() {
     this.selectedKeg = null;
+  }
+
+  addKeg(newKegFromChild: Keg) {
+    this.masterKegList.push(newKegFromChild);
   }
 }
